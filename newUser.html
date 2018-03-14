@@ -1,0 +1,624 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width" />
+    <script src="/aws-sdk-2.41.0.min.js"></script>
+    <script src="/jquery.min.js"></script>
+    <script src='/moment.min.js'></script>
+    <script src="/socket.io.js"></script>
+    <script src="/newUser.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93975426-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-93975426-2');
+    </script>
+    <style>
+        @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+        @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:300,400");
+
+        html {
+            margin: 0px;
+            height: 100%;
+            width: 100%;
+            /* IE10+ */
+            background: #fff;
+        }
+
+        div {
+            font-family: 'Roboto Slab';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 12pt;
+            letter-spacing: 1px;
+        }
+
+        body {
+            margin: 0px;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+
+        [contentEditable=true]:empty:not(:focus):after {
+            content: attr(data-text);
+            white-space: nowrap;
+            width: 200px;
+            overflow: hidden;
+        }
+
+        [contenteditable="true"].login-input br {
+            display: none;
+        }
+
+        [contenteditable="true"].login-input * {
+            display: inline;
+            white-space: nowrap;
+        }
+
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: inherit;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        .logo-wrapper {
+            font-family: 'Roboto Slab';
+            color: white;
+            font-size: 20pt;
+            display: inline-block;
+            margin-left: 1%;
+            vertical-align: middle;
+            height: 100%;
+        }
+
+
+        .logo-dot {
+            width: 3px;
+            height: 3px;
+            display: block;
+            border-radius: 50%;
+            background-color: white;
+            margin: 0 auto;
+        }
+
+        .logo {
+            width: 100%;
+            min-width: 50px;
+            height: auto;
+            margin-bottom: 1.5em;
+            text-align: center;
+        }
+
+            .logo img {
+                width: auto;
+                max-width: 50px;
+                height: auto;
+            }
+
+        .body-wrapper {
+            overflow: hidden;
+        }
+
+        .image-text-wrapper {
+            position: absolute;
+            top: 0;
+            width: 60%;
+            height: 100%;
+            float: right;
+        }
+
+        .image-fade {
+            height: 100%;
+            width: 100%;
+            background: black;
+            opacity: .7;
+        }
+
+        .image-text {
+            width: 100%;
+            height: 50%;
+            float: left;
+            margin-left: 10%;
+        }
+
+        .image-wrapper {
+            display: inline-block;
+            width: 60%;
+            height: 100%;
+            float: right;
+        }
+
+            .image-wrapper img {
+                height: 100%;
+                width: 100%;
+                background: black;
+            }
+
+        /********BEGIN LOGIN*********/
+
+        .login-form-wrapper {
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
+            margin-top: 10%;
+            text-align: center;
+            color: white;
+            font-size: 30px;
+        }
+
+        .login-form {
+            position: relative;
+            z-index: 1;
+            background: none;
+            max-width: 360px;
+            padding: 45px;
+            text-align: center;
+        }
+
+        .login-wrapper {
+            background: rgb(41,131,206); /* Old browsers */
+            background: -moz-linear-gradient(45deg, rgba(41,131,206,1) 0%, rgba(111,230,182,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(45deg, rgba(41,131,206,1) 0%,rgba(111,230,182,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(45deg, rgba(41,131,206,1) 0%,rgba(111,230,182,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2983ce', endColorstr='#6fe6b6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            float: left;
+        }
+
+        .login-input {
+            font-family: 'Roboto Slab';
+            color: white;
+            background: none;
+            font-weight: 300;
+            border: 0;
+            border-bottom: 1px solid #fff;
+            width: 100%;
+            height: 36px;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background 0.4s, color 0.4s, font-size 0.05s, width 0.4s, border 0.4s;
+            -moz-appearance: textfield;
+            -webkit-rtl-ordering: logical;
+            text-rendering: auto;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            -webkit-writing-mode: horizontal-tb;
+            outline: 0px solid transparent;
+        }
+
+        #username:before {
+            font-family: 'Material Icons';
+            color: white;
+            font-size: 21px;
+            content: '\E7FD';
+            padding-right: 10px;
+        }
+
+        #password:before {
+            font-family: 'Material Icons';
+            color: white;
+            font-size: 21px;
+            content: '\E897';
+            padding-right: 10px;
+        }
+
+        .login-input:focus {
+            border-bottom: 1px solid #00ff21;
+        }
+
+        .positive-long-button {
+            display: inline-block;
+            height: 60px;
+            padding: 0;
+            width: 191px;
+            margin: auto;
+            border: none;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            text-align: center;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            -moz-border-radius: 30px;
+            -webkit-border-radius: 30px;
+            border-radius: 30px;
+            background: rgb(67,219,158); /* Old browsers */
+            background: -moz-linear-gradient(45deg, rgba(67,219,158,1) 0%, rgba(117,177,227,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(45deg, rgba(67,219,158,1) 0%,rgba(117,177,227,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(45deg, rgba(67,219,158,1) 0%,rgba(117,177,227,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43db9e', endColorstr='#75b1e3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
+
+            .positive-long-button:hover {
+                background: #2983CE;
+                color: white;
+            }
+
+        .text-button {
+            background: none;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            margin: 20px;
+        }
+
+        .sales-text-large {
+            color: white;
+            font-size: 32px;
+            margin-left: 15%;
+            display: block;
+            margin-top: 20%;
+        }
+
+        .sales-text-small {
+            color: white;
+            font-size: 20px;
+            display: block;
+            margin-top: 10%;
+        }
+
+        /********END LOGIN**********/
+
+        /***************BEGIN MODAL****************/
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 10; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            background-color: white;
+            border: none;
+        }
+
+            .close-modal:hover,
+            .close-modal:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        /**********END MODAL***********/
+
+        /********START CHATBOX**********/
+        .demo-wrapper-main {
+            width: 75%;
+            font-size: 20pt;
+            color: #444;
+            margin-top: 4em;
+            margin-left: 10%;
+            text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-wrapper-sub {
+            width: 75%;
+            font-size: 14pt;
+            color: #444;
+            margin-top: 2em;
+            margin-left: 10%;
+            text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-box {
+            position: absolute;
+            right: 20px;
+            bottom: 0px;
+            background: white;
+            width: 300px;
+            border-radius: 5px 5px 0px 0px;
+            box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        }
+
+        .chat-head {
+            width: inherit;
+            background: #2c3e50;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+            .chat-head i {
+                cursor: pointer;
+                float: right;
+                font-size: 29pt;
+                margin: 5pt;
+                color: white;
+            }
+
+        .rotate {
+            -moz-transition: all .2s linear;
+            -webkit-transition: all .2s linear;
+            transition: all .2s linear;
+        }
+
+            .rotate.down {
+                -moz-transform: rotate(180deg);
+                -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+
+        .chat-head-text {
+            font-size: 18pt;
+            text-align: center;
+            color: white;
+            padding: 8px;
+            display: inline-block;
+        }
+
+
+
+        .chat-body {
+            height: 355px;
+            width: inherit;
+            overflow: auto;
+            margin-bottom: 45px;
+        }
+
+        .chat-text {
+            position: fixed;
+            bottom: 0px;
+            height: 45px;
+            width: inherit;
+        }
+
+            .chat-text input {
+                width: inherit;
+                height: inherit;
+                box-sizing: border-box;
+                border-top: 1px solid #bdc3c7;
+                padding: 10px;
+                resize: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: none;
+            }
+
+                .chat-text input:active, .chat-text input:focus, .chat-text input:hover {
+                    border-color: royalblue;
+                }
+
+        p.msg-send {
+            background: #2ecc71;
+        }
+
+        p.msg-receive {
+            background: #3498db;
+        }
+
+        p.msg-send, p.msg-receive {
+            width: 200px;
+            font-size: 10pt;
+            height: auto;
+            padding: 5px 5px 5px 10px;
+            margin: 10px auto;
+            border-radius: 3px;
+            line-height: 20px;
+            position: relative;
+            color: white;
+        }
+
+            p.msg-receive:before {
+                content: '';
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                border: 15px solid;
+                border-color: transparent #3498db transparent transparent;
+                left: -29px;
+                top: 7px;
+            }
+
+            p.msg-send:after {
+                content: '';
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                border: 15px solid;
+                border-color: transparent transparent transparent #2ecc71;
+                right: -29px;
+                top: 0px;
+            }
+
+            p.msg-receive:hover, p.msg-send:hover {
+                opacity: .9;
+            }
+
+        /********END CHATBOX**********/
+
+        /********START DASHBOARD**********/
+
+        .dashboard {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+
+
+        .control-ribbon {
+            background: rgb(41,131,206); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(41,131,206,1) 0%, rgba(86,163,226,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(41,131,206,1) 0%,rgba(86,163,226,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(41,131,206,1) 0%,rgba(86,163,226,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2983ce', endColorstr='#56a3e2',GradientType=0 ); /* IE6-9 */
+            display: inline-block;
+            width: 5%;
+            height: 100%;
+            float: left;
+        }
+
+        .control-wrap {
+            cursor: pointer;
+            height: auto;
+            text-align: center;
+            display: block;
+            margin-top: 15px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            transition: all linear .1s;
+        }
+
+            .control-wrap:hover {
+                background: #7CB4E3;
+            }
+
+        .control-button {
+            font-family: 'Material Icons';
+            color: white;
+            font-size: 18pt;
+            display: block;
+        }
+
+        .control-label {
+            color: white;
+            font-size: 8pt;
+            letter-spacing: 0;
+        }
+
+        .dash-body {
+            display: inline-block;
+            width: 95%;
+            height: 100%;
+            float: right;
+        }
+
+        .paging-table {
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .dash-headerRow {
+            display: table-row;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .dash-paging-row {
+            display: table-row;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .dash-paging-headerCell {
+            display: table-cell;
+            padding: 5px;
+            height: 45px;
+            vertical-align: middle;
+            position: relative;
+        }
+
+        .dash-paging-headerCell-text {
+            font-size: 8pt;
+        }
+        /********END DASHBOARD**********/
+
+        /*********BEGIN LOADER*********/
+
+        .loader-wrapper {
+            height: 100%;
+            width: 100%;
+            z-index: 100;
+            background-color: black;
+            opacity: .8;
+            transition: all linear .2s;
+        }
+
+        .loader {
+            z-index: 100;
+            border: 8px solid white;
+            border-top-width: 8px;
+            border-top-style: solid;
+            border-top-color: rgb(243, 243, 243);
+            border-radius: 50%;
+            border-top: 8px solid rgba(41,131,206,1);
+            width: 40px;
+            height: 40px;
+            -webkit-animation: spin .5s linear infinite;
+            animation: spin .5s linear infinite;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+</body>
+</html>
+

@@ -1,0 +1,427 @@
+ssh -i "ec2_expressv1.pem" ubuntu@ec2-54-244-71-87.us-west-2.compute.amazonaws.com
+AKIAIFWGHWNH5FANA5YA
+Fn+6P/7h/AjemxxqPJio3SgkqHEEjalbX/5pfbKM
+
+
+http://localhost:8080/
+node index2.js
+
+
+trans1.sql
+seq.py
+rng.py
+rng2.py (we use this as import for seq and panel bc no initial arguments)
+panel.py
+loaddb.js
+sch.js
+index.js
+index2.js
+lambda_function.py
+changes.txt
+s3file.py
+upload.html
+changes.txt
+babel.html
+package.json
+examples.js
+
+
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+
+
+http://jsfiddle.net/elussich/r4ugbhps/
+
+
+npm run-script deploy
+npm run-script deploy
+
+important files
+  lambda_funcation.py (chatbot)
+  load_db.py. (load db with prospects)
+  dev_express dec26.js (set URL safe encryption into DB)
+  em.py (send emails to prospects from db)
+  send_sms.py  (send sms message bulk)
+  send.py (send after chatbot finishes v1)
+  send2.py (send after chatbot finishes v2)
+  cancel.py (send out notification of manager busy)
+  rng.py (find the available range -- does the date intersect calculation)
+  
+
+
+pip install virtualenv
+create virtual environment
+  cd myproject/
+  virtualenv venv
+
+  virtualenv venv --system-site-packages
+
+  source venv/bin/activate
+  pip install <package>
+
+  deactivate
+
+then
+  cd $VIRTUAL_ENV/lib/python2.7/site-packages
+  zip -r /Users/bryceroche/desktop/pylam/name.zip *
+
+zip contents not folder
+  cd myfolder
+  zip -r name.zip .
+
+
+http://boto3.readthedocs.io/en/latest/reference/services/lambda.html#Lambda.Client.invoke
+http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
+https://stackoverflow.com/questions/2915471/install-a-python-package-into-a-different-directory-using-pip
+http://sourabhbajaj.com/mac-setup/Python/virtualenv.html
+https://forums.macrumors.com/threads/how-to-add-files-to-an-existing-zip-file.683350/
+pwd = print working directory
+
+aws iam create-access-key --user-name Bryce
+#from ical import handle_ical
+#from letwilio import send_sms
+
+        #ical_msg =  handle_ical([the_user])
+        #rtn_msg = rtn_msg + ical_msg
+
+        
+node listen on port 80
+  sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
+  Then I launch my Node.js on port 3000. Requests to port 80 will get mapped to port 3000.
+
+You should also edit your /etc/rc.local file and add that line minus the sudo. Th
+
+https://vhvbhxyrxk.execute-api.us-west-2.amazonaws.com/Prod
+
+
+pip install pymysql -t /Users/bryceroche/desktop/pylam
+pip install boto3 -t /Users/bryceroche/desktop/pylam
+
+
+pip install validate_email -t /Users/bryceroche/desktop/pylam
+pip install twilio -t /Users/bryceroche/desktop/pylam
+pip install utils -t /Users/bryceroche/desktop/pylam
+pip install boto3 -t /Users/bryceroche/desktop/ftp
+pip install pymysql -t /home/ubuntu/pylam
+pip install boto3 -t /home/ubuntu/pylam
+
+
+
+/home/ubuntu/pyem
+pip install pandas -t /Users/bryceroche/desktop/resumeparser
+
+http://boto3.readthedocs.io/en/latest/guide/quickstart.html#using-boto-3
+http://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html
+Requirement already satisfied: virtualenv in /Library/Python/2.7/site-packages
+
+mac pwd -- show full path
+
+my_botv3
+us-east-1:0a562e13-cbf0-4d8c-9852-75ef9da9afa6
+
+var cDetails = {
+  host: 'adricoredb.crk1o9ha4m4n.us-west-2.rds.amazonaws.com',
+  user: 'ADRICoreMaster',
+  password: 'Adr15ys!coredb',
+  database: 'ADRI_CORE',
+  multipleStatements: 'true'
+};
+
+USE TRUGREEN;
+
+CALL SP_TRANS1();
+CALL SP_TRANS2();
+CALL SP_TRANS3();
+
+CALL SP_REMOVE_01_MINUTE();
+CALL SP_UPDATE_MSG_LOG();
+
+  SELECT
+    CAST(AES_DECRYPT(A.CLIENT_UI_INSTANCE, 'WILDWEST') AS CHAR) AS CLIENT_UI_INSTANCE,
+        CAST(AES_DECRYPT(B.CLIENT_DB_INSTANCE, 'WILDWEST') AS CHAR) AS CLIENT_DB_INSTANCE,
+        CAST(AES_DECRYPT(B.CLIENT_DB_CRN, 'WILDWEST') AS CHAR) AS CLIENT_DB_CRN,
+        CAST(AES_DECRYPT(B.CLIENT_DB_CRP, 'WILDWEST') AS CHAR) AS CLIENT_DB_CRP,
+        CAST(AES_DECRYPT(B.CLIENT_DB_NAME, 'WILDWEST') AS CHAR) AS CLIENT_DB_NAME
+        
+  FROM T_CLIENTS A
+    LEFT JOIN T_DB_INSTANCES B ON A.DB_INSTANCE_ID = B.ROWID
+
+
+for each new chat bot we need
+  one more api gateway endpoint
+  two more lambda functions 
+  one more lex bot 
+  reuse the twilo authentication token
+  
+
+def close_with_response_card(session_attributes, fulfillment_state, message, title, subtitle, attachment, image_url):
+    response = {'sessionAttributes': session_attributes,
+  'dialogAction': {
+  'type': 'Close',
+  'fulfillmentState': fulfillment_state,
+  'message': {'contentType': 'PlainText', 'content': message},
+  'responseCard': {'version': '0',
+  'contentType': 'application/vnd.amazonaws.card.generic',
+  'genericAttachments': [{
+  'title': title,
+  'subTitle': subtitle,
+  'attachmentLinkUrl': attachment,
+  'imageUrl': image_url}]}}}
+    return response
+
+Cognito_lex_bot_2Auth_Role
+Cognito_lex_bot_2Unauth_Role
+//https://aws.amazon.com/blogs/ai/greetings-visitor-engage-your-web-users-with-amazon-lex/
+
+{
+"body-json": "From=424-374-6845&Body=schedule+interview"
+}
+
+botpool
+Cognito_botpoolAuth_Role
+
+
+zip contents not folder
+  cd myfolder
+  zip -r name.zip .
+
+
+nginx 
+  http upgrade enables socket.io screws up ajax
+  we need the cert and the key files
+
+git 
+  need to initially ssh not https when setup pm2
+
+pm2 
+  pm2 unstartup systemd
+
+
+
+
+https://www.recruitercall-trugreen.com/candidate.html?iref=dGVzdDAwMDExMTAxMDEwMS13aWxkd2VzdC10ZXN0MTExMQ==&uid=dGVzdDAwMDExMTAxMDEwMQ==&cliid=VFJVR1JFRU4wNjIw&uiid=aHR0cHM6Ly93d3cucmVjcnVpdGVyY2FsbC10cnVncmVlbi5jb20v
+
+aws s3 sync s3/buckets/www.recruiting.adri-sys.com --size-only
+
+https://s3.console.aws.amazon.com/s3/buckets/www.recruiting.adri-sys.com/?region=us-west-2&tab=overview
+
+aws s3 sync . s3://www.recruiting.adri-sys.com
+
+
+cat /etc/nginx/sites-available/tutorial
+cat /etc/nginx/sites-enabled/tutorial
+
+https://api.jquery.com/click/
+
+sudo apt-get purge nginx nginx-common
+
+pgrep nginx
+sudo kill xxxx
+sudo service nginx start
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+cd /etc/nginx/sites-available/
+git clone git@github.com:bryceroche/Dev_Express.git
+git clone git@github.com:roberttod/tutorial-pt-2.git
+
+
+exit
+pm2 deploy ecosystem.config.js production setup
+pm2 deploy ecosystem.config.js production
+npm run-script deploy
+
+AKIAJSDOLYLSRNICM6EA
+0KU3rqwSOfSZKyN9U5GenAdoXvYW9y2/bCn+Ctq7
+
+User name Bryce-at-441245404490
+Password p8HW1ZMJuzyx3QMIzrhsWLcZXbNZ5GAVCmFr8GSYO0E=
+
+ssh-add /path/to/mykey
+
+git remote remove origin
+git remote add origin ssh://git-codecommit.us-west-2.amazonaws.com/v1/repos/Dev_Express
+
+rm -rf ~/Dev_Express
+cat ~/.ssh/key9.pub
+chmod 600 id_rsa
+
+sudo chmod 700 id_rsa.pem
+
+cat ~/.ssh/key8
+ssh-add ~/.ssh/key8
+ssh-add ~/.ssh/key8.pub
+
+git remote add -t \* -f origin https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Dev_Express
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqp6hBeBZKXBgM/eVlZTetPdDxN51JLB6cbfrtOxC8iNWjzUODQlINZhb/ymXPu/a5OBeRa3SA4Dah9/HbqPHQT8AKcHW2M3lahzg24ezYcFlKs5OwJnAAGiCYW/XcSXfShl1fNRbsknIdigEL7B0CD+oe3UIIVLoZ4pavBTtRtBCg67Tkg5LxvBwxzotgfYhv1XkVh3ByNqt4SAyD7ryv+oj5K9TrWHv0/F2+31FK9uvkZpLQrOtu1RqO7oDsgjtmicdSR7Ra3RO6ArRFYmrS9TLxrl3B+I88VHoeLK1ZXtXrtnXphzeS7Le1p/gh0DF0oKjV9XKJexvwngrguH25 ubuntu@ip-172-31-47-122
+
+cp ~/.ssh/git_key2 /home/ubuntu/git_key2
+
+git clone ssh://git-codecommit.us-west-2.amazonaws.com/v1/repos/Dev_Express
+
+cat ~/.ssh/git_key1.pub
+
+rm -rf ~/Dev_Express
+
+git remote add origin https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Dev_Express.git
+
+https://hackernoon.com/tutorial-creating-and-managing-a-node-js-server-on-aws-part-1-d67367ac5171
+https://hackernoon.com/tutorial-creating-and-managing-a-node-js-server-on-aws-part-2-5fbdea95f8a1
+https://hackernoon.com/setting-up-node-js-with-a-database-part-1-3f2461bdd77f
+
+cd Desktop/hello-nodejs/hello-nodejs
+
+const express = require('express')
+const app = express()
+app.get('/', (req, res) => {
+  res.send('finishing up tutorial #2 ... ah yeah!  ADRI FOR LIFE')
+})
+app.listen(3000, () => console.log('Server running on port 3000'))
+
+cd Desktop/tutorial-node-database
+
+chmod 400 ec2_expressv1.pem
+
+cd Downloads
+control a control c get back to prompt
+google:  node.js request parse
+google:  node js express reference javascript
+https://stackoverflow.com/questions/5797852/in-node-js-how-do-i-include-functions-from-my-other-files
+
+mv  -v ~/server/node_modules/hello.js ~/.ssh/
+
+ 	mkdir hello
+ 	mkdir tutorial-node-database
+cd tutorial-node-database
+touch knexfile.js
+touch index.js
+touch store.js
+mkdir public
+touch public/index.html
+touch public/app.js
+# choose all defaults when prompted
+npm init
+
+git clone https://github.com/bryceroche/Dev_Express
+
+http://localhost:3000/
+
+
+rm -R hello
+
+
+rm -R hello-world-node-express
+rm -R node-js-sample
+rm -R node_modules/hello
+rm -R -f server
+
+
+pm2 deploy ecosystem.config.js production
+mysqladmin -u root password 'password'
+
+
+https://hackernoon.com/tutorial-creating-and-managing-a-node-js-server-on-aws-part-1-d67367ac5171
+
+ec2-54-149-95-169.us-west-2.compute.amazonaws.com:3000
+e
+
+mkdir tutorial
+
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+source ~/.bashrc
+
+cat /etc/nginx/sites-available/tutorial
+
+sudo ln -s /etc/nginx/sites-available/tutorial /etc/nginx/sites-enabled/tutorial
+
+git pull origin master
+Or you could set it up so that your local master branch tracks github master branch as an upstream:
+
+git branch --set-upstream-to=origin/master master
+git pull
+
+
+https://stackoverflow.com/questions/11828270/how-to-exit-the-vim-editor
+sudo env PATH=$PATH:/home/ubuntu/.nvm/versions/node/v7.10.1/bin /home/ubuntu/.nvm/versions/node/v7.10.1/lib/node_modules/pm2/bin/pm2 startup systemd -u ubuntu --hp /home/ubuntu
+ubuntu@ip-172-31-47-122:~/server$ 
+
+
+nano ~/.bashrc
+
+or create a new repository on the command line
+
+mv  -v ~/server/hello.js ~/server/node_modules/
+
+echo "# hello-nodejs" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/bryceroche/node_routing.git
+git push -u origin master
+…or push an existing repository from the command line
+
+git remote add origin https://github.com/bryceroche/node_routing.git
+git remote add origin https://github.com/bryceroche/Dev_Express
+git push -u origin master
+…or import code from another repository
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project
+
+git add .
+git commit -m "Ze server."
+git push
+
+git ls-tree -r master --name-only
+git status
+
+git rm -r --cached node_modules/
+
+
+ssh-keygen -t rsa
+npm install express --save
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDzrz3oaKaHX5K2nU6qXvG6XVUlca3gMYNgmNLmArNseWyjYO+GXc09GgnV5rAfsP9BQemIMtWSVseHQT3hKdTSEPgl5xtkEjcRYVWyQ6YxYLxuKl+9lzJVgCPxf/+DJrxJck71nyyvTkmNPl0unZ0A+qA34/qPEy97TSd8v+BNyL1Bh/Z47HvlOnkcVwUFUjOD7nasUw9EBFVyIlpexkam5FDIpaRYtMkYO+LuBbuRA9VsfjVOyr0u9eOsHm5wPLgfK3aK7hkz+21gPcIW/nPX6X2cBizTaNO4kIcepZJueGBDElZJcn/0wQFmxhkO5j5+patttH0lVrdRNDIOzDel ubuntu@ip-172-31-47-122
+
+
+git clone https://github.com/bryceroche/dev_express
+
+rm -r ~/server/hello-nodejs/hello-nodejs
+
+rm -rf ~/dev_express
+
+ubuntu@ip-172-31-47-122:~/server/hello-nodejs$ cat index.js
+const express = require('express')
+const app = express()
+app.get('/', (req, res) => {
+  res.send('another message .... from hello world exmample!')
+})
+app.listen(3000, () => console.log('Server running on port 3000'))
+ubuntu@ip-172-31-47-122:~/server/hello-nodejs$ 
+
+
+Initialized empty Git repository in /Users/bryceroche/Desktop/hello/.git/
+
+
+module.exports = {
+  apps: [{
+    name: 'hello-nodejs',
+    script: './index.js'
+  }],
+  deploy: {
+    production: {
+      user: 'ubuntu',
+      host: 'ec2-54-149-95-169.us-west-2.compute.amazonaws.com',
+      key: '~/Downloads/ec2_expressv1.pem',
+      ref: 'origin/master',
+      repo: 'https://github.com/bryceroche/hello-nodejs',
+      path: '/home/ubuntu/server/hello-nodejs',
+      'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
+    }
+  }
+}
+
+Identity added: /home/ubuntu/.ssh/id_rsa (/home/ubuntu/.ssh/id_rsa)
+
+

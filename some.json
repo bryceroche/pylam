@@ -1,0 +1,20 @@
+{
+  "currentIntent": {
+    "slots": {
+      "Location": "",
+      "Position": ""
+    },
+    "name": "Availability",
+    "confirmationStatus": "None"
+  },
+  "bot": {
+    "alias": "$LATEST",
+    "version": "$LATEST",
+    "name": "BookTrip"
+  },
+  "userId": "John",
+  "invocationSource": "DialogCodeHook",
+  "outputDialogMode": "Text",
+  "messageVersion": "1.0",
+  "sessionAttributes": {}
+}

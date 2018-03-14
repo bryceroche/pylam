@@ -1,0 +1,83 @@
+{
+   "userID":"12345",
+   "interviewID": "QURSSTAwMDItNTIyNzY1LVI1NTM0",
+   "clientID": "UkJTREVNTzIwMTcwODE4",
+   "interview": {},
+   "positions": {},
+   "uiID": "aHR0cHM6Ly9zMy11cy13ZXN0LTIuYW1hem9uYXdzLmNvbS93d3cucmVjcnVpdGluZy5hZHJpLXN5cy5jb20v",
+   "info": {
+       "id": "MTAwMjA4MDI=",
+       "fName": "Adri-sys",
+       "lName": "Support",
+       "email": "support@adri-sys.com",
+       "phone": "",
+       "location": "York PA",
+       "defaultInterviewMinutes": 40,
+       "ranking": null
+   },
+   "availability": [
+       [{
+               "day": "wednesday",
+               "schedule": {
+                   "startTime": {
+                       "hour": "8",
+                       "minutes": "00",
+                       "period": "AM"
+                   },
+                   "endTime": {
+                       "hour": "11",
+                       "minutes": "00",
+                       "period": "AM"
+                   },
+                   "lunchTime": {
+                       "hour": "1",
+                       "minutes": "01",
+                       "period": "AM"
+                   }
+               }
+       },
+       {
+               "day": "monday",
+               "schedule": {
+                   "startTime": {
+                       "hour": "8",
+                       "minutes": "00",
+                       "period": "AM"
+                   },
+                   "endTime": {
+                       "hour": "11",
+                       "minutes": "00",
+                       "period": "AM"
+                   },
+                   "lunchTime": {
+                       "hour": "1",
+                       "minutes": "01",
+                       "period": "AM"
+                   }
+               }
+           }
+       ],
+       [
+           {
+           "day": "monday",
+           "schedule": {
+               "startTime": {
+                   "hour": "12",
+                   "minutes": "15",
+                   "period": "PM"
+               },
+               "endTime": {
+                   "hour": "3",
+                   "minutes": "00",
+                   "period": "PM"
+               },
+               "lunchTime": {
+                   "hour": "1",
+                   "minutes": "01",
+                   "period": "AM"
+               }
+           }
+           }
+       ]
+   ]
+}

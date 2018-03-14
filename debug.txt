@@ -1,0 +1,39 @@
+ the CloudWatch log group.
+be9-11e7-9c60-b9c358190f85	Registering retry handlers for service: lambda
+[DEBUG]	2017-11-17T22:48:06.236Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Event before-parameter-build.lambda.Invoke: calling handler <function generate_idempotent_uuid at 0x7f7f29cd1a28>
+[DEBUG]	2017-11-17T22:48:06.293Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Making request for OperationModel(name=Invoke) (verify_ssl=True) with params: {'body': '{"mobile": "+14243746845", "message":"asdde"}', 'url': u'https://lambda.us-east-1.amazonaws.com/2015-03-31/functions/send_sms/invocations', 'headers': {u'X-Amz-Log-Type': 'Tail', 'User-Agent': 'Boto3/1.4.7 Python/2.7.12 Linux/4.9.58-18.55.amzn1.x86_64 exec-env/AWS_Lambda_python2.7 Botocore/1.7.37', u'X-Amz-Invocation-Type': 'Event', u'X-Amz-Client-Context': 'cool app'}, 'context': {'auth_type': None, 'client_region': 'us-east-1', 'has_streaming_input': True, 'client_config': <botocore.config.Config object at 0x7f7f298a9a50>}, 'query_string': {}, 'url_path': u'/2015-03-31/functions/send_sms/invocations', 'method': u'POST'}
+[DEBUG]	2017-11-17T22:48:06.293Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Event request-created.lambda.Invoke: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x7f7f2987f750>>
+[DEBUG]	2017-11-17T22:48:06.293Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Event choose-signer.lambda.Invoke: calling handler <function set_operation_specific_signer at 0x7f7f29cd1938>
+[DEBUG]	2017-11-17T22:48:06.293Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Calculating signature using v4 auth.
+[DEBUG]	2017-11-17T22:48:06.293Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	CanonicalRequest:
+POST
+/2015-03-31/functions/send_sms/invocations
+
+host:lambda.us-east-1.amazonaws.com
+x-amz-client-context:cool app
+x-amz-date:20171117T224806Z
+x-amz-invocation-type:Event
+x-amz-log-type:Tail
+x-amz-security-token:FQoDYXdzEJf//////////wEaDKvmFgqQi99iieOCfyLnAfZTIH/CaFjD8APb/lFCuVnN+S4TgnKhQKmb/GHbbe+BhNLDOMjeucsaiPFGdLb73bPL2QHGom/5ZzsU4oSfwVEFQgRGqU8jNoD1OMUfmIMJrzNsrpFyksKg1NRZWYEzqDcc1xm7APqYqhBhoFZRuw+fHQQcxKHiKtuQbnEp4ZxQ4mLN3XeGJtFOS+nH6KcK6uiR8dJp/NzrRBCU6SmYn9d0bt3YjO38azLW2Cv5Y/V/flTBH7yFQ+riVQwRNVaXsOsjirHFMeC3Iu3m/kuRSjhN3i9aJh++ld5uDIQbWXlUSUEB7iWzfCiVwb3QBQ==
+
+host;x-amz-client-context;x-amz-date;x-amz-invocation-type;x-amz-log-type;x-amz-security-token
+5df154314fadbe7bc914cae1395b26992428d3cf8dc66254eeb194da5c8c084c
+[DEBUG]	2017-11-17T22:48:06.293Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	StringToSign:
+AWS4-HMAC-SHA256
+20171117T224806Z
+20171117/us-east-1/lambda/aws4_request
+c4e4c91a0c0c318a01a6d25e03ab6fe9e614516b18b5ac2ef73b8d8001abf93b
+[DEBUG]	2017-11-17T22:48:06.293Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Signature:
+e3c15b355f816af2269ffb03adfa20848751f06a2f535eb0c711d0a47327f985
+[DEBUG]	2017-11-17T22:48:06.294Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Sending http request: <PreparedRequest [POST]>
+[INFO]	2017-11-17T22:48:06.294Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Starting new HTTPS connection (1): lambda.us-east-1.amazonaws.com
+[DEBUG]	2017-11-17T22:48:06.616Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	"POST /2015-03-31/functions/send_sms/invocations HTTP/1.1" 202 0
+[DEBUG]	2017-11-17T22:48:06.616Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Response headers: {'x-amzn-requestid': '60866ba7-cbe9-11e7-b81c-b5a8ea126ab9', 'content-length': '0', 'x-amzn-trace-id': 'root=1-5a0f6726-6c768415694ace3920a9b602;sampled=0', 'x-amzn-remapped-content-length': '0', 'connection': 'keep-alive', 'date': 'Fri, 17 Nov 2017 22:48:06 GMT'}
+[DEBUG]	2017-11-17T22:48:06.633Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Response body:
+<botocore.response.StreamingBody object at 0x7f7f295adf50>
+[DEBUG]	2017-11-17T22:48:06.633Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	Event needs-retry.lambda.Invoke: calling handler <botocore.retryhandler.RetryHandler object at 0x7f7f295ad810>
+[DEBUG]	2017-11-17T22:48:06.633Z	604fa3fd-cbe9-11e7-9c60-b9c358190f85	No retry needed.
+END RequestId: 604fa3fd-cbe9-11e7-9c60-b9c358190f85
+REPORT RequestId: 604fa3fd-cbe9-11e7-9c60-b9c358190f85	Duration: 427.42 ms	Billed Duration: 500 ms 	Memory Size: 128 MB	Max Memory Used: 37 MB	
+
+14243746845

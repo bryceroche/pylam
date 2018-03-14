@@ -1,0 +1,4 @@
+Set it up such that even if the name and email is in the database, resubmitting a name and email in the new user form on the chat.Adri-hr.com/newUser.html page resends the invite
+Whenever a user submits a name, along with sending the user the email to try Audrey, it send a copy to info@adri-sys.com
+Can u customize the invite for a position... So if we upload a candidate for a specific position, it doesn't ask them what position, it already knows
+We need the ability to set up different availability for different positions. So architect that in the db
